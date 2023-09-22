@@ -3,7 +3,7 @@ import { store } from "../redux/store";
 import { refreshAction } from "../redux/actions/authAction";
 
 const instance = axios.create({
-  baseURL: `http://127.0.0.1:8000/api`,
+  baseURL: `https://${import.meta.env.VITE_SERVER_URL}/api`,
 });
 
 instance.interceptors.response.use(

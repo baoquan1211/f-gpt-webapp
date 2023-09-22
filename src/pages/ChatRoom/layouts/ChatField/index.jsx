@@ -172,7 +172,9 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
               className="py-[8px] px-[16px] border-[1px] w-[700px] flex justify-center items-center shadow-2xl rounded-[12px] 
               shadow-slate-500 overflow-auto ct-transition bg-background"
             >
-              <MessageInputField props={{ message, setMessage }} />
+              <MessageInputField
+                props={{ message, setMessage, submitHandle }}
+              />
               {loading ? (
                 <LoadingIcons.BallTriangle
                   stroke="black"

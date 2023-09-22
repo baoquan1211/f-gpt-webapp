@@ -1,6 +1,7 @@
 const SendMessageButton = ({ disabled = true }) => {
   return (
     <button
+      id="send-message-button"
       type="submit"
       disabled={disabled}
       className={`p-2 rounded-lg ct-transition ${
