@@ -1,5 +1,6 @@
-import ChatRoom from "./pages/ChatRoom";
-import Login from "./pages/Login";
+import React, { Suspense } from "react";
+const ChatRoom = React.lazy(() => import("./pages/ChatRoom"));
+const Login = React.lazy(() => import("./pages/Login"));
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -30,14 +31,16 @@ const App = () => {
           <QueryClientProvider client={queryClient}>
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
               <BrowserRouter>
-                <ToastContainer />
-                <Routes>
-                  <Route path="/" element={<ChatRoom />} />
-                  <Route path="/c/:id" element={<ChatRoom />} />
-                  <Route path="/c/:id" element={<ChatRoom />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/policies" element={<Policy />} />
-                </Routes>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <ToastContainer />
+                  <Routes>
+                    <Route path="/" element={<ChatRoom />} />
+                    <Route path="/c/:id" element={<ChatRoom />} />
+                    <Route path="/c/:id" element={<ChatRoom />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/policies" element={<Policy />} />
+                  </Routes>
+                </Suspense>
               </BrowserRouter>
               <ReactQueryDevtools initialIsOpen={false} />
             </ThemeProvider>
