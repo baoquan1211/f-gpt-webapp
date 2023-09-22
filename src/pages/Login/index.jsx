@@ -1,6 +1,4 @@
 import React from "react";
-import { login } from "../../services/Auth/index.js";
-import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +13,6 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.auth);
-  const queryClient = useQueryClient();
 
   const loginHandle = (event) => {
     event.preventDefault();
@@ -30,7 +27,6 @@ const Login = () => {
   useEffect(() => {
     if (auth) {
       navigate("/policies");
-      queryClient.invalidateQueries(["get-conversation"]);
     }
   });
 

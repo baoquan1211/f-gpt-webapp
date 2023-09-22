@@ -4,13 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { getPolicy } from "../../services/Policy";
 import { Checkbox } from "../../components/ui/checkbox.tsx";
 import { Label } from "../../components/ui/label";
-
+import { useSelector } from "react-redux";
 import "./index.css";
 
 function Policy() {
   const [isChecked, setIsChecked] = useState(false);
   const [policies, setPolicies] = useState([]);
   const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth.auth);
 
   const toggleCheckbox = () => {
     setIsChecked(!isChecked);
@@ -25,6 +26,12 @@ function Policy() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (!auth) {
+      navigate("/login");
+    }
+  });
 
   return (
     <div className="policy-container">

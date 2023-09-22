@@ -3,7 +3,7 @@ import { store } from "../redux/store";
 import { refreshAction } from "../redux/actions/authAction";
 
 const instance = axios.create({
-  baseURL: `https://${import.meta.env.VITE_SERVER_URL}/api`,
+  baseURL: `${import.meta.env.VITE_SERVER_URL}/api`,
 });
 
 instance.interceptors.response.use(
@@ -21,7 +21,10 @@ instance.interceptors.response.use(
     if (
       response.status === 401 &&
       response.statusText === "Unauthorized" &&
-      response.data.code === "token_not_valid"
+      response.data.code === "token_not_valid" &&
+      config.url !== "/refresh" &&
+      config.url !== "/login" &&
+      config.url !== "/logout"
     ) {
       config._retry = true;
       store.dispatch(refreshAction()).then(() => {
@@ -29,6 +32,7 @@ instance.interceptors.response.use(
         return instance(config);
       });
     }
+    // return error;
   }
 );
 

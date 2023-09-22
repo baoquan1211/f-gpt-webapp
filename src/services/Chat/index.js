@@ -1,7 +1,7 @@
 import axios from "../base_axios.js";
 import { store } from "../../redux/store.js";
 
-const getConversation = (conversationID, accessToken) => {
+const getConversation = (conversationID) => {
   axios.defaults.headers.common["Authorization"] =
     "Bearer " + store.getState().auth.access;
   if (conversationID === undefined || conversationID === null) {
@@ -10,7 +10,7 @@ const getConversation = (conversationID, accessToken) => {
   return axios.get(`/v1/conversations/${conversationID}`);
 };
 
-const updateConversation = (conversationID, conversationName, accessToken) => {
+const updateConversation = (conversationID, conversationName) => {
   axios.defaults.headers.common["Authorization"] =
     "Bearer " + store.getState().auth.access;
   return axios.patch(
@@ -18,7 +18,7 @@ const updateConversation = (conversationID, conversationName, accessToken) => {
   );
 };
 
-const deleteConversation = (conversationID, accessToken) => {
+const deleteConversation = (conversationID) => {
   axios.defaults.headers.common["Authorization"] =
     "Bearer " + store.getState().auth.access;
   return axios.delete(`/v1/conversations/${conversationID}`);
