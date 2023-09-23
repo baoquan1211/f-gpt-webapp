@@ -17,7 +17,6 @@ instance.interceptors.response.use(
     // Do something with response error
     //return Promise.reject(error);
     const { response, config } = error;
-    console.log(config);
     if (
       response.status === 401 &&
       response.statusText === "Unauthorized" &&
