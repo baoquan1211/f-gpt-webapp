@@ -31,13 +31,7 @@ instance.interceptors.response.use(
         return instance(config);
       });
     }
-    let res = {};
-    if (error.message) {
-      res.data = error.response.data;
-      res.status = error.response.status;
-      res.header = error.response.header;
-    }
-    return res;
+    return error;
   }
 );
 
