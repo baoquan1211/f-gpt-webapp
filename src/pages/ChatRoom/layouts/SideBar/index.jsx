@@ -8,7 +8,7 @@ import { useQueryClient } from "@tanstack/react-query";
 const SideBar = ({ setShowSideBar, sideBarRef }) => {
   const currentConversation = useParams().id;
   const getConversation = useConversation();
-  const { data: conversations } = getConversation;
+  const { data: conversations, isError, refetch } = getConversation;
   const queryClient = useQueryClient();
 
   useEffect(() => {

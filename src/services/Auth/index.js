@@ -6,7 +6,7 @@ const login = ({ username, password }) => {
 };
 
 const refresh = () => {
-  const refreshToken = "Bearer " + store.getState().auth.refresh;
+  const refreshToken = store.getState().auth.refresh;
   return axios.post("/refresh", { refresh: refreshToken });
 };
 

@@ -10,6 +10,7 @@ instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
+
     return response.data;
   },
   async function (error) {
@@ -26,12 +27,8 @@ instance.interceptors.response.use(
       config.url !== "/logout"
     ) {
       config._retry = true;
-      store.dispatch(refreshAction()).then(() => {
-        config.headers.Authorization = "Bearer " + store.getState().auth.access;
-        return instance(config);
-      });
-    }
-    return error;
+      store.dispatch(refreshAction());
+    } else return error;
   }
 );
 

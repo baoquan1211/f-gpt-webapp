@@ -12,18 +12,21 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Policy from "./pages/Policies";
 import "react-toastify/dist/ReactToastify.css";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      cacheTime: Infinity,
-    },
-    mutations: {
-      cacheTime: Infinity,
-    },
-  },
-});
-
 const App = () => {
+  const [queryClient] = React.useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            cacheTime: Infinity,
+          },
+          mutations: {
+            cacheTime: Infinity,
+          },
+        },
+      })
+  );
+
   return (
     <>
       <Provider store={store}>
