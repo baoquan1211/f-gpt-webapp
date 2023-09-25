@@ -25,7 +25,10 @@ instance.interceptors.response.use(
       config.url !== "/login" &&
       config.url !== "/logout"
     ) {
-      store.dispatch(refreshAction());
+      console.log("REFRESHING TOKEN");
+      store.dispatch(refreshAction()).then(() => {
+        console.log("REFRESHING TOKEN FINISHED");
+      });
     } else {
       let res = {};
       if (error.message) {
