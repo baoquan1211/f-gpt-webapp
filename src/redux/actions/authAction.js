@@ -31,11 +31,12 @@ export const logoutAction = createAsyncThunk(
 
 export const refreshAction = createAsyncThunk(
   "auth/refresh",
-  async (thunkAPI) => {
+  async (varibles, thunkAPI) => {
     try {
       const response = await refresh();
-      if (response.status >= 400)
-        return thunkAPI.rejectWithValue(response.data);
+      if (response.status >= 400) {
+        return thunkAPI.rejectWithValue(response.data.detail);
+      }
       return response;
     } catch (e) {
       return thunkAPI.rejectWithValue(e);

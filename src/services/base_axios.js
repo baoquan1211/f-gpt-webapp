@@ -20,15 +20,21 @@ instance.interceptors.response.use(
     const { response, config } = error;
     if (
       response.status === 401 &&
-      response.statusText === "Unauthorized" &&
       response.data.code === "token_not_valid" &&
       config.url !== "/refresh" &&
       config.url !== "/login" &&
       config.url !== "/logout"
     ) {
-      config._retry = true;
       store.dispatch(refreshAction());
-    } else return error;
+    } else {
+      let res = {};
+      if (error.message) {
+        res.data = error.response.data;
+        res.status = error.response.status;
+        res.header = error.response.header;
+      }
+      return res;
+    }
   }
 );
 

@@ -10,8 +10,8 @@ const useConversation = (conversationID) => {
       throw new Error("Something went wrong");
     },
     cacheTime: Infinity,
-    staleTime: 10 * 1000,
-    refetchOnMount: true,
+    staleTime: 60 * 1000,
+    refetchOnWindowFocus: false,
     retry: true,
   });
   return useConversationQuery;

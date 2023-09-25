@@ -45,12 +45,13 @@ const authSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(logoutAction.fulfilled, (state, action) => {
-      state.loading = false;
       state.access = null;
-      state.refresh = null;
-      state.username = null;
-      state.user_id = null;
       state.auth = false;
+      state.error = null;
+      state.loading = false;
+      state.refresh = null;
+      state.user_id = null;
+      state.username = null;
     });
     builder.addCase(logoutAction.rejected, (state, action) => {
       state.loading = false;
@@ -65,12 +66,13 @@ const authSlice = createSlice({
       state.access = action.payload.access;
     });
     builder.addCase(refreshAction.rejected, (state, action) => {
-      state.loading = false;
       state.access = null;
-      state.refresh = null;
-      state.username = null;
-      state.user_id = null;
       state.auth = false;
+      state.error = null;
+      state.loading = false;
+      state.refresh = null;
+      state.user_id = null;
+      state.username = null;
     });
   },
 });
