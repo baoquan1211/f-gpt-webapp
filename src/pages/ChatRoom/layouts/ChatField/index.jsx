@@ -8,7 +8,6 @@ import LoadingIcons from "react-loading-icons";
 import { getConversation } from "../../../../services/Chat";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import AssistantAvartar from "./components/AssistantAvartar";
 import PALM from "../../../../assets/png/icon-palm.png";
@@ -38,6 +37,7 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
         return;
       }
       if (data.messages === null) return;
+
       setConversation(JSON.parse(data.messages));
       setConversationName(data.name);
     });
@@ -58,34 +58,35 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
         if (reason === "io server disconnect") {
           socket.connect();
         }
-        toast.error("Can not connect to server");
         return;
       });
 
       socket.on("answer_request", (data) => {
         setLoading(false);
         if (data.error) {
-          toast.error(data.error);
-          // window.location.reload();
-          return;
+          if (
+            conversationID === undefined ||
+            conversationID == data.conversation
+          ) {
+            setConversation([
+              ...conversation,
+              { role: "server", content: data.error, error: true },
+            ]);
+            return;
+          }
         }
-        if (
-          conversationID === undefined ||
-          conversationID == data.conversation
-        ) {
-          setConversation([...conversation, data.response]);
-          scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-        }
-
         if (conversationID === undefined) {
           navigate(`/c/${data.conversation}`);
           conversationID = data.conversation;
           queryClient.invalidateQueries(["get-conversation"]);
         }
+        if (conversationID == data.conversation) {
+          setConversation([...conversation, data.response]);
+          scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+        }
       });
     } catch (error) {
       console.error(error);
-      toast.error(error);
     }
   }, [conversation]);
   const submitHandle = (event) => {
@@ -124,7 +125,7 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
         ) : null}
         <div className="chat-field flex-grow w-full justify-center pb-32 overflow-y-auto overflow-x-hidden dark:text-gray-200 text-xs md:text-base">
           {conversation?.map((item, index) => (
-            <MessageCard key={index} role={item?.role} blocked={item?.blocked}>
+            <MessageCard key={index} role={item?.role} error={item?.blocked}>
               <MarkdownToHtml value={item?.content} />
             </MessageCard>
           ))}
@@ -176,7 +177,7 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
                 props={{ message, setMessage, submitHandle }}
               />
               {loading ? (
-                <LoadingIcons.BallTriangle
+                <LoadingIcons.Puff
                   stroke="black"
                   fill="gray"
                   className="w-8 h-8"

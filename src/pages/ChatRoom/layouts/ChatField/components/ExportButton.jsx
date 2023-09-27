@@ -51,7 +51,7 @@ const ExportButton = ({ conversation, conversationID, conversationName }) => {
   };
 
   return (
-    <Dialog className="p-2">
+    <Dialog>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <DownloadIcon />
@@ -59,12 +59,15 @@ const ExportButton = ({ conversation, conversationID, conversationName }) => {
         <DropdownMenuContent>
           <DropdownMenuLabel>Export File</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <button className="w-full text-start" onClick={exportTxtHandle}>
+          <DropdownMenuItem asChild>
+            <button
+              className="w-full text-start cursor-pointer"
+              onClick={exportTxtHandle}
+            >
               Text
             </button>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem asChild>
             {window.innerWidth < 768 ? (
               <button className="w-full text-start" onClick={exportPdfHandle}>
                 PDF
@@ -78,14 +81,17 @@ const ExportButton = ({ conversation, conversationID, conversationName }) => {
               </DialogTrigger>
             )}
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <button className="w-full text-start" onClick={exportJsonHandle}>
+          <DropdownMenuItem asChild>
+            <button
+              className="w-full text-start cursor-pointer"
+              onClick={exportJsonHandle}
+            >
               Json
             </button>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DialogContent className="bg-foreground">
+      <DialogContent className="p-8">
         {pdfData !== null ? (
           <iframe
             src={URL.createObjectURL(pdfData)}

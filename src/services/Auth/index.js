@@ -11,7 +11,7 @@ const refresh = () => {
 };
 
 const logout = () => {
-  const refreshToken = "Bearer " + store.getState().auth.refresh;
+  const refreshToken = store.getState().auth.refresh;
   return axios.post("/logout", { refresh: refreshToken });
 };
 

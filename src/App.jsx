@@ -4,13 +4,12 @@ const Login = React.lazy(() => import("./pages/Login"));
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import Policy from "./pages/Policies";
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from "@/components/ui/toaster";
 
 const App = () => {
   const [queryClient] = React.useState(
@@ -34,8 +33,7 @@ const App = () => {
           <QueryClientProvider client={queryClient}>
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
               <BrowserRouter>
-                <Suspense fallback={<div>Loading...</div>}>
-                  <ToastContainer />
+                <Suspense fallback={<></>}>
                   <Routes>
                     <Route path="/" element={<ChatRoom />} />
                     <Route path="/c/:id" element={<ChatRoom />} />
@@ -50,6 +48,7 @@ const App = () => {
           </QueryClientProvider>
         </PersistGate>
       </Provider>
+      {/* <Toaster /> */}
     </>
   );
 };
