@@ -6,13 +6,13 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef, useEffect } from "react";
-import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
 import {
   updateConversation,
   deleteConversation,
 } from "../../../../../services/Chat";
+import { useToast } from "@/components/ui/use-toast";
 
 import {
   AlertDialog,
@@ -33,6 +33,7 @@ const ConversationCard = ({ conversation, currentConversation }) => {
   const inputNameRef = useRef(null);
   const changeNameShowRef = useRef(null);
   const accessToken = useSelector((state) => state.auth.access);
+  const { toast } = useToast();
   const changeNameMutation = useMutation(
     () =>
       updateConversation(
@@ -42,12 +43,12 @@ const ConversationCard = ({ conversation, currentConversation }) => {
       ),
     {
       onSuccess: () => {
-        toast.success("Updated name successfully");
+        toast({ title: "Updated name successfully" });
         changeNameMutation.reset();
         conversation.name = inputNameRef.current?.value;
       },
       onError: () => {
-        toast.error(changeNameMutation.error);
+        toast({ title: changeNameMutation.error });
         changeNameMutation.reset();
       },
     }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "../../components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getPolicy } from "../../services/Policy";
 import { Checkbox } from "../../components/ui/checkbox.tsx";
 import { Label } from "../../components/ui/label";
@@ -12,10 +12,6 @@ function Policy() {
   const [policies, setPolicies] = useState([]);
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth.auth);
-
-  const toggleCheckbox = () => {
-    setIsChecked(!isChecked);
-  };
 
   const fetchData = () => {
     getPolicy().then((data) => {
@@ -34,7 +30,7 @@ function Policy() {
   });
 
   return (
-    <div className="policy-container">
+    <div className="policy-container bg-gradient-to-r from-rose-100 to-teal-100 dark:from-slate-800 dark:to-blue-900">
       <h1 className="policy-header">Terms of use</h1>
 
       <h1 className="policy-title">Thank you for using Fujichat!</h1>
@@ -65,14 +61,21 @@ function Policy() {
         <Checkbox
           className="data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground border-foreground"
           checked={isChecked}
-          onCheckedChange={toggleCheckbox}
+          onCheckedChange={() => {
+            setIsChecked(!isChecked);
+          }}
           id="agree"
         />
         <Label htmlFor="agree">I agree with terms of service</Label>
       </div>
       <div className="button-next">
-        <Button disabled={!isChecked}>
-          <Link to={"/"}>Next</Link>
+        <Button
+          disabled={!isChecked}
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Next
         </Button>
       </div>
     </div>

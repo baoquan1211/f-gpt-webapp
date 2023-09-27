@@ -2,12 +2,12 @@ import AssistantAvartar from "./AssistantAvartar";
 import UserAvartar from "./UserAvartar";
 import { twMerge } from "tailwind-merge";
 
-const MessageCard = ({ children, role = "server", blocked = false }) => {
+const MessageCard = ({ children, role = "server", error = false }) => {
   return (
     <div
       className={twMerge(
         `border-y-[1px] py-3 w-full flex justify-center ${
-          blocked === true
+          error === true
             ? "bg-red-100 border-red-400 dark:bg-red-200 dark:text-black"
             : "bg-blue-100"
         } ${
