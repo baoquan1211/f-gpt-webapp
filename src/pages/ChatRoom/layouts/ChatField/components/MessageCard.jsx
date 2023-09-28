@@ -12,10 +12,10 @@ const MessageCard = ({ children, role = "server", error = false }) => {
             : "bg-blue-100"
         } ${
           role === "openai" || role === "palm"
-            ? "bg-gray-100 dark:bg-gray-800/50"
+            ? "bg-gray-100/80 dark:bg-gray-800/80"
             : ""
         } 
-          ${role === "user" ? "bg-white dark:bg-[#444654]" : ""}`
+          ${role === "user" ? "bg-white/80 dark:bg-[#444654]/80" : ""}`
       )}
     >
       <div className="w-[80%] flex">
