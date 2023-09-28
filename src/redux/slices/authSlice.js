@@ -72,10 +72,12 @@ const authSlice = createSlice({
       state.error = null;
     });
     builder.addCase(refreshAction.fulfilled, (state, action) => {
+      console.log("REFRESHING TOKEN FINISHED");
       state.loading = false;
       state.access = action.payload.access;
     });
     builder.addCase(refreshAction.rejected, (state, action) => {
+      console.log("REFRESHING TOKEN FAILED");
       state.access = null;
       state.auth = false;
       state.error = null;

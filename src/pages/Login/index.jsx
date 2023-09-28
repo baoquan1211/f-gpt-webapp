@@ -7,12 +7,14 @@ import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { z } from "zod";
+import { store } from "@/redux/store.js";
+
 const Login = () => {
   const usernameRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth);
+  let user = useSelector((state) => state.auth);
   const { toast } = useToast();
   const loginValidation = z.object({
     username: z
@@ -43,7 +45,8 @@ const Login = () => {
           password: passwordRef.current.value,
         })
       ).then(() => {
-        if (user.error) {
+        const { auth } = store.getState();
+        if (auth.error) {
           toast({
             variant: "destructive",
             description: user.error.detail,
@@ -51,16 +54,10 @@ const Login = () => {
         }
       });
     }
-    if (valition.error) {
-      toast({
-        variant: "destructive",
-        description: "Username/password can't be empty.",
-      });
-    }
   };
 
   useEffect(() => {
-    if (user.auth) {
+    if (user.access) {
       navigate("/policies");
     }
   });
@@ -80,6 +77,8 @@ const Login = () => {
             ref={usernameRef}
             placeholder="Username"
             className="min-w-[250px] md:min-w-[350px] mt-8"
+            autoComplete="username"
+            required
           />
 
           <Input
@@ -88,6 +87,8 @@ const Login = () => {
             ref={passwordRef}
             placeholder="Password"
             className="min-w-[250px] md:min-w-[350px] mt-3"
+            autoComplete="current-password"
+            required
           />
 
           <Button

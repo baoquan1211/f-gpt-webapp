@@ -1,5 +1,5 @@
-import { cn } from "../../../../../lib/utils";
-import PALM from "../../../../../assets/png/icon-palm.png";
+import { cn } from "@/lib/utils";
+import PALM from "@/assets/png/icon-palm.png";
 
 const AssistantAvartar = ({ platform = "openai", className }) => {
   return (

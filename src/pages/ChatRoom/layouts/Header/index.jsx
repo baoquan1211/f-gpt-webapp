@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { ModeToggle } from "../../../../components/mode-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,22 +7,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../../../components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { User2, LogOut } from "lucide-react";
-import { Button } from "../../../../components/ui/button";
-import { logoutAction } from "../../../../redux/actions/authAction";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { logoutAction } from "@/redux/actions/authAction";
 
 const Header = () => {
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!user.auth) {
-  //     navigate("/login/");
-  //   }
-  // });
 
   const logoutHandel = () => {
     dispatch(logoutAction());

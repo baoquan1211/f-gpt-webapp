@@ -1,6 +1,6 @@
 import axios from "axios";
-import { store } from "../redux/store";
-import { refreshAction } from "../redux/actions/authAction";
+import { store } from "@/redux/store";
+import { refreshAction } from "@/redux/actions/authAction";
 
 const instance = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_URL}/api`,
@@ -26,17 +26,15 @@ instance.interceptors.response.use(
       config.url !== "/logout"
     ) {
       console.log("REFRESHING TOKEN");
-      store.dispatch(refreshAction()).then(() => {
-        console.log("REFRESHING TOKEN FINISHED");
-      });
+      store.dispatch(refreshAction());
     } else {
-      let res = {};
+      let response = {};
       if (error.message) {
-        res.data = error.response.data;
-        res.status = error.response.status;
-        res.header = error.response.header;
+        response.data = error.response.data;
+        response.status = error.response.status;
+        response.header = error.response.header;
       }
-      return res;
+      return response;
     }
   }
 );

@@ -1,18 +1,17 @@
 import SendMessageButton from "./components/SendMessageButton";
 import { useState, useEffect, useRef } from "react";
 import MessageCard from "./components/MessageCard";
-import { socket } from "../../../../socket/index.js";
+import { socket } from "@/socket/index.js";
 import MessageInputField from "./components/MessageInputField";
 import MarkdownToHtml from "./components/MarkdownToHtml";
 import LoadingIcons from "react-loading-icons";
-import { getConversation } from "../../../../services/Chat";
+import { getConversation } from "@/services/Chat";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import AssistantAvartar from "./components/AssistantAvartar";
-import PALM from "../../../../assets/png/icon-palm.png";
+import PALM from "@/assets/png/icon-palm.png";
 import ExportButton from "./components/ExportButton";
-import utf8 from "utf8";
 
 const ChatField = ({ chatFieldRef, conversationID }) => {
   if (localStorage.getItem("ai-platform") == null) {
@@ -82,7 +81,6 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
           queryClient.invalidateQueries(["get-conversation"]);
         }
         if (conversationID == data.conversation) {
-          console.log(data);
           setConversation([...conversation, data.response]);
           scrollRef.current?.scrollIntoView({ behavior: "smooth" });
         }
@@ -113,20 +111,21 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
   };
 
   return (
-    <div
-      className={`h-[calc(100dvh-60px)] relative flex-grow chat-field-enter-done`}
+    <section
+      className="h-[calc(100dvh-60px)] relative flex-grow chat-field-enter-done overflow-hidden"
       ref={chatFieldRef}
     >
       <div className="relative flex flex-col items-center justify-center w-full h-full ct-transition overflow-hidden">
-        {conversationID ? (
-          <div className="w-full flex justify-end p-4">
+        <div className="w-full flex justify-end p-4 h-[56px]">
+          {conversationID ? (
             <ExportButton
               conversation={conversation}
               conversationID={conversationID}
               conversationName={conversationName}
             />
-          </div>
-        ) : null}
+          ) : null}
+        </div>
+
         <div className="chat-field flex-grow w-full justify-center pb-32 overflow-y-auto overflow-x-hidden dark:text-gray-200 text-xs md:text-base">
           {conversation?.map((item, index) => (
             <MessageCard key={index} role={item?.role} error={item?.blocked}>
@@ -144,7 +143,7 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
           ) : null}
           <div ref={scrollRef} />
         </div>
-        <div className="absolute left-0 z-40 w-full bottom-2 flex flex-col md:items-center">
+        <div className="absolute left-0 z-40 w-full bottom-2 flex flex-col md:items-center p-2">
           <div className="w-[700px] flex gap-x-3 p-3 select-none">
             <button
               onClick={() => {
@@ -193,7 +192,7 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
