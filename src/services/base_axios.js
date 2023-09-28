@@ -18,7 +18,6 @@ instance.interceptors.response.use(
     // Do something with response error
     //return Promise.reject(error);
     const { response, config } = error;
-    console.log(response);
     if (
       response.status === 401 &&
       response.data.code === "token_not_valid" &&
