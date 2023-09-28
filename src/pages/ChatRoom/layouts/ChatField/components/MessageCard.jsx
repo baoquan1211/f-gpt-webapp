@@ -8,7 +8,7 @@ const MessageCard = ({ children, role = "server", error = false }) => {
       className={twMerge(
         `border-y-[1px] py-3 w-full flex justify-center ${
           error === true
-            ? "bg-red-100 border-red-400 dark:bg-red-200 dark:text-black"
+            ? "bg-red-100 border-red-400 dark:bg-red-200/80 dark:text-black"
             : "bg-blue-100"
         } ${
           role === "openai" || role === "palm"

@@ -2,7 +2,7 @@ import { DownloadIcon } from "lucide-react";
 import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { getStrpdf } from "../../../../../services/Chat/index";
+import { getStrpdf } from "@/services/Chat/index";
 import LoadingIcons from "react-loading-icons";
 import { saveAs } from "file-saver";
 import {

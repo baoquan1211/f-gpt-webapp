@@ -8,10 +8,7 @@ import {
 import { useState, useRef, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
-import {
-  updateConversation,
-  deleteConversation,
-} from "../../../../../services/Chat";
+import { updateConversation, deleteConversation } from "@/services/Chat";
 import { useToast } from "@/components/ui/use-toast";
 
 import {

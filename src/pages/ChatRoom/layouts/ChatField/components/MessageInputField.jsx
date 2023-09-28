@@ -1,9 +1,5 @@
-import { CloudCog } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-
 const MessageInputField = ({ props }) => {
-  // const textareaRef = useRef(null);
-  const { message, setMessage, submitHandle } = props;
+  const { message, setMessage } = props;
 
   const resizeTextarea = (event) => {
     event.target.style.height = "auto";

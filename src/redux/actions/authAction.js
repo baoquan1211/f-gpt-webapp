@@ -1,4 +1,4 @@
-import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { login, logout, refresh } from "../../services/Auth";
 
 export const loginAction = createAsyncThunk(
