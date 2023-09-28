@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../redux/actions/authAction.js";
-import { Button } from "../../components/ui/button.jsx";
-import { Input } from "../../components/ui/input.tsx";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { z } from "zod";
 const Login = () => {
@@ -92,7 +92,7 @@ const Login = () => {
 
           <Button
             disabled={user.loading}
-            className="mt-3"
+            className="mt-8"
             type="submit"
             variants="destructive"
           >
