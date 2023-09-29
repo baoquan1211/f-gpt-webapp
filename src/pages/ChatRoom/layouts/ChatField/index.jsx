@@ -1,5 +1,5 @@
 import SendMessageButton from "./components/SendMessageButton";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MessageCard from "./components/MessageCard";
 import { socket } from "@/socket/index.js";
 import MessageInputField from "./components/MessageInputField";
@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import AssistantAvartar from "./components/AssistantAvartar";
 import PALM from "@/assets/png/icon-palm.png";
 import ExportButton from "./components/ExportButton";
+const NewChatSCreen = React.lazy(() => import("@/components/new-chat-screen"));
 
 const ChatField = ({ chatFieldRef, conversationID }) => {
   if (localStorage.getItem("ai-platform") == null) {
@@ -132,6 +133,9 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
               <MarkdownToHtml value={item?.content} />
             </MessageCard>
           ))}
+          {!conversationID && conversation.length === 0 ? (
+            <NewChatSCreen />
+          ) : null}
           {loading === true && loadingRef.current === conversationID ? (
             <MessageCard role={loadingAIPlatform.current}>
               <LoadingIcons.ThreeDots
@@ -143,6 +147,7 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
           ) : null}
           <div ref={scrollRef} />
         </div>
+
         <div className="absolute left-0 z-40 w-full bottom-2 flex flex-col md:items-center p-2">
           <div className="w-[700px] flex gap-x-3 p-3 select-none">
             <button
