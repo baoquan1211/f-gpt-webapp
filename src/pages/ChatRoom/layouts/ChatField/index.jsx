@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 import AssistantAvartar from "./components/AssistantAvartar";
 import PALM from "@/assets/png/icon-palm.png";
 import ExportButton from "./components/ExportButton";
-import utf8 from "utf8";
 
 const ChatField = ({ chatFieldRef, conversationID }) => {
   if (localStorage.getItem("ai-platform") == null) {

@@ -5,7 +5,7 @@ import Button from "./layouts/SideBar/components/SidebarButton";
 import Header from "./layouts/Header";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import SidebarButton from "./layouts/SideBar/components/SidebarButton";
 const RootScreen = React.lazy(() => import("../../components/root-screen"));
 const SideBar = React.lazy(() => import("./layouts/SideBar"));
 const ChatField = React.lazy(() => import("./layouts/ChatField"));
@@ -23,9 +23,9 @@ const ChatRoom = () => {
         <Header />
         <div className="lg:flex relative block ct-transition mt-[60px] overflow-hidden bg-gradient-to-r from-rose-100 to-teal-100 dark:from-slate-800 dark:to-blue-900">
           {
-            <Button
-              className={`absolute z-10 ml-2 bg-gray-100 dark:bg-[#444654] border-none w-11 h-11 hover:bg-white top-2 dark:hover:bg-[#595b6d] ${
-                showSideBar ? "block lg:hidden" : ""
+            <SidebarButton
+              className={`absolute z-10 ml-2 bg-gray-50 dark:bg-[#444654] border-none w-11 h-11 hover:bg-white top-2 dark:hover:bg-[#595b6d] ${
+                showSideBar ? "flex lg:hidden" : ""
               }`}
               onClick={() => {
                 setShowSideBar((currentState) => {
@@ -48,7 +48,7 @@ const ChatRoom = () => {
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="9" y1="3" x2="9" y2="21"></line>
               </svg>
-            </Button>
+            </SidebarButton>
           }
           <CSSTransition
             in={showSideBar}
