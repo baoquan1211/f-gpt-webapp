@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,7 @@ const Login = () => {
   const dispatch = useDispatch();
   let user = useSelector((state) => state.auth);
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
   const loginValidation = z.object({
     username: z
       .string({
@@ -39,17 +40,19 @@ const Login = () => {
       password: passwordRef.current.value,
     });
     if (valition.success) {
+      setLoading(true);
       dispatch(
         loginAction({
           username: usernameRef.current.value,
           password: passwordRef.current.value,
         })
       ).then(() => {
+        setLoading(false);
         const { auth } = store.getState();
         if (auth.error) {
           toast({
             variant: "destructive",
-            description: user.error.detail,
+            description: auth.error.detail,
           });
         }
       });
@@ -92,7 +95,7 @@ const Login = () => {
           />
 
           <Button
-            disabled={user.loading}
+            disabled={loading}
             className="mt-8"
             type="submit"
             variants="destructive"
