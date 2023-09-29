@@ -54,7 +54,6 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
   useEffect(() => {
     try {
       socket.on("connect_error", (reason) => {
-        console.error("test", reason);
         if (reason === "io server disconnect") {
           socket.connect();
         }
@@ -81,7 +80,6 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
           queryClient.invalidateQueries(["get-conversation"]);
         }
         if (conversationID == data.conversation) {
-          console.log(data);
           setConversation([...conversation, data.response]);
           scrollRef.current?.scrollIntoView({ behavior: "smooth" });
         }
@@ -90,6 +88,7 @@ const ChatField = ({ chatFieldRef, conversationID }) => {
       console.error(error);
     }
   }, [conversation]);
+
   const submitHandle = (event) => {
     event.preventDefault();
 

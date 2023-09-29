@@ -9,7 +9,9 @@ const MessageCard = ({ children, role = "server", error = false }) => {
         `border-y-[1px] py-3 w-full flex justify-center ${
           error === true
             ? "bg-red-100 border-red-400 dark:bg-red-200/80 dark:text-black"
-            : "bg-blue-100 dark:text-black"
+            : role === "server"
+            ? "bg-blue-100 dark:text-black"
+            : ""
         } ${
           role === "openai" || role === "palm"
             ? "bg-gray-100/80 dark:bg-gray-800/80"
