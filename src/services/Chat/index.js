@@ -1,5 +1,5 @@
-import axios from "../base_axios.js";
-import { store } from "../../redux/store.js";
+import axios from "@/services/base_axios.js";
+import { store } from "@/redux/store.js";
 
 const getConversation = (conversationID) => {
   axios.defaults.headers.common["Authorization"] =

@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import AssistantAvartar from "./components/AssistantAvartar";
 import PALM from "@/assets/png/icon-palm.png";
 import ExportButton from "./components/ExportButton";
+
 const NewChatSCreen = React.lazy(() => import("@/components/new-chat-screen"));
 
 const ChatField = ({ chatFieldRef, conversationID }) => {

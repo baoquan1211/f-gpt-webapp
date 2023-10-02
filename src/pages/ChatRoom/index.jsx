@@ -1,7 +1,6 @@
 import "./index.css";
 import { CSSTransition } from "react-transition-group";
 import React, { useState, useRef } from "react";
-import Button from "./layouts/SideBar/components/SidebarButton";
 import Header from "./layouts/Header";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";

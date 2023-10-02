@@ -9,6 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import Policy from "./pages/Policies";
 import { Toaster } from "@/components/ui/toaster";
+import Loading from "./pages/Loading";
 
 const App = () => {
   const [queryClient] = React.useState(
@@ -32,7 +33,7 @@ const App = () => {
           <QueryClientProvider client={queryClient}>
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
               <BrowserRouter>
-                <Suspense fallback={<></>}>
+                <Suspense fallback={<Loading />}>
                   <Routes>
                     <Route path="/" element={<ChatRoom />} />
                     <Route path="/c/:id" element={<ChatRoom />} />

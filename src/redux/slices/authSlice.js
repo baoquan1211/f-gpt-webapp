@@ -3,7 +3,7 @@ import {
   loginAction,
   logoutAction,
   refreshAction,
-} from "../actions/authAction";
+} from "@/redux/actions/authAction";
 
 const initialState = {
   loading: false,

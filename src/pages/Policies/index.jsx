@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Button } from "../../components/ui/button";
+import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { getPolicy } from "../../services/Policy";
-import { Checkbox } from "../../components/ui/checkbox";
-import { Label } from "../../components/ui/label";
+import { getPolicy } from "@/services/Policy";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { useSelector } from "react-redux";
 
 function Policy() {
@@ -30,8 +30,10 @@ function Policy() {
 
   return (
     <section className="flex items-center justify-center p-9 bg-gradient-to-r from-rose-100 to-teal-100 dark:from-slate-800 dark:to-blue-900">
-      <div className="max-w-[1024px] rounded-xl py-5 px-12 bg-primary-foreground text-justify flex flex-col gap-1">
-        <h1 className="text-5xl text-center">Terms of use</h1>
+      <div className="max-w-[1024px] rounded-xl py-5 px-5 md:px-12 bg-primary-foreground text-justify flex flex-col gap-1">
+        <h1 className="text-3xl md:text-5xl text-center font-bold">
+          Terms of use
+        </h1>
 
         <h1 className="text-xl my-2">Thank you for using Fujichat!</h1>
         <h1 className="my-2">
