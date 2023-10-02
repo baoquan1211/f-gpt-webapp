@@ -12,7 +12,6 @@ const initialState = {
   username: null,
   name: null,
   user_id: null,
-  auth: false,
   error: null,
 };
 
@@ -24,7 +23,6 @@ const authSlice = createSlice({
     builder.addCase(loginAction.pending, (state) => {
       state.loading = true;
       state.access = null;
-      state.auth = false;
       state.error = null;
     });
     builder.addCase(loginAction.fulfilled, (state, action) => {
@@ -36,23 +34,21 @@ const authSlice = createSlice({
         state.username = action.payload.username;
         state.user_id = action.payload.user_id;
         state.name = action.payload.name;
-        state.auth = true;
       }
     });
     builder.addCase(loginAction.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-      state.auth = false;
     });
     builder.addCase(logoutAction.pending, (state) => {
       state.loading = true;
       state.access = null;
-      state.auth = false;
+
       state.error = null;
     });
     builder.addCase(logoutAction.fulfilled, (state, action) => {
       state.access = null;
-      state.auth = false;
+
       state.error = null;
       state.loading = false;
       state.refresh = null;
@@ -63,12 +59,11 @@ const authSlice = createSlice({
     builder.addCase(logoutAction.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-      state.auth = false;
     });
     builder.addCase(refreshAction.pending, (state, action) => {
       state.loading = true;
       state.access = null;
-      state.auth = false;
+
       state.error = null;
     });
     builder.addCase(refreshAction.fulfilled, (state, action) => {
@@ -79,7 +74,6 @@ const authSlice = createSlice({
     builder.addCase(refreshAction.rejected, (state, action) => {
       console.log("REFRESHING TOKEN FAILED");
       state.access = null;
-      state.auth = false;
       state.error = null;
       state.loading = false;
       state.refresh = null;

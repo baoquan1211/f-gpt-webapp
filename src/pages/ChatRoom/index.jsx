@@ -17,7 +17,7 @@ const ChatRoom = () => {
   const chatFieldRef = useRef(null);
   const conversationID = useParams().id;
 
-  if (user.auth)
+  if (user.access)
     return (
       <>
         <Header />
