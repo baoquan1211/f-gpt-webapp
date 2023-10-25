@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { register } from "@/services/Auth";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Register = () => {
   const nameRef = useRef();
@@ -15,6 +16,7 @@ const Register = () => {
   const emailRef = useRef();
   const { toast } = useToast();
   const navigate = useNavigate();
+  let user = useSelector((state) => state.auth);
 
   const registerMutaion = useMutation({
     mutationFn: ({ name, email, username, password }) => {
@@ -45,6 +47,12 @@ const Register = () => {
         navigate("/login");
       });
   };
+
+  useEffect(() => {
+    if (user.access) {
+      navigate("/policies");
+    }
+  });
 
   return (
     <section className="bg-gradient-to-r from-rose-100 to-teal-100 dark:from-slate-800 dark:to-blue-900 w-full h-screen">
