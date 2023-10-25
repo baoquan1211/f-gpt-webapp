@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "@/redux/actions/authAction.js";
@@ -95,6 +95,12 @@ const Login = () => {
             autoComplete="current-password"
             required
           />
+          <span className="text-xs text-primary/70">
+            {"Don't have account. "}{" "}
+            <Link to={"/register"} className="text-primary">
+              {"Please register."}
+            </Link>
+          </span>
 
           <Button
             disabled={loading}

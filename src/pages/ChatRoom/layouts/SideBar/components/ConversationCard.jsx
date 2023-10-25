@@ -21,23 +21,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../../../../../components/ui/alert-dialog";
-import { useSelector } from "react-redux";
+} from "@/components/ui/alert-dialog";
 import { useNavigate, Link } from "react-router-dom";
 
 const ConversationCard = ({ conversation, currentConversation }) => {
   const [nameChanging, setNameChanging] = useState(false);
   const inputNameRef = useRef(null);
   const changeNameShowRef = useRef(null);
-  const accessToken = useSelector((state) => state.auth.access);
   const { toast } = useToast();
   const changeNameMutation = useMutation(
-    () =>
-      updateConversation(
-        conversation.id,
-        inputNameRef.current?.value,
-        accessToken
-      ),
+    () => updateConversation(conversation.id, inputNameRef.current?.value),
     {
       onSuccess: () => {
         toast({ title: "Updated name successfully" });
@@ -52,16 +45,16 @@ const ConversationCard = ({ conversation, currentConversation }) => {
   );
 
   const deleteMutation = useMutation(
-    () => deleteConversation(conversation.id, accessToken),
+    () => deleteConversation(conversation.id),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["get-conversation"]);
-        toast.success(`Delete ${conversation.name} successfully`);
+        toast({ title: `Delete ${conversation.name} successfully` });
         deleteMutation.reset();
         navigate("/");
       },
       onError: () => {
-        toast.error(deleteMutation.error);
+        toast({ title: deleteMutation.error });
         deleteMutation.reset();
       },
     }

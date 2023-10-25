@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Policy from "./pages/Policies";
 import { Toaster } from "@/components/ui/toaster";
 import Loading from "./pages/Loading";
+import Register from "./pages/Register";
 
 const App = () => {
   const [queryClient] = React.useState(
@@ -39,6 +40,7 @@ const App = () => {
                     <Route path="/c/:id" element={<ChatRoom />} />
                     <Route path="/c/:id" element={<ChatRoom />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
                     <Route path="/policies" element={<Policy />} />
                   </Routes>
                 </Suspense>

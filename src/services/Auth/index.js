@@ -15,4 +15,8 @@ const logout = () => {
   return axios.post("/logout", { refresh: refreshToken });
 };
 
-export { login, refresh, logout };
+const register = ({ name, email, username, password }) => {
+  return axios.post("/v1/users", { name, email, username, password });
+};
+
+export { login, refresh, logout, register };
